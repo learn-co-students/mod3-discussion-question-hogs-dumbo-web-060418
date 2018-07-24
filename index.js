@@ -26,25 +26,37 @@ function transitionPage(el, groupOut, groupIn) {
 /*************************************************************************/
 
 function delayedFadeOut(div, range) {
-  // Your solution here
-  fadeOut(div)
+  // call back with parameter is not actually being invoked
+  // setimout takes in a call back and a integer
+  setTimeout(() => fadeOut(div), range)
 }
 
 function delayedFadeIn(div, range) {
-  // Your solution here
-  fadeIn(div)
+  setTimeout(()=> fadeIn(div), range)
 }
 
 function fadeAllOut(el, group) {
-  // Your solution here
+  //group is passed in, must iterate over group and change the transitioning effect for the desired elements
   group.forEach(div => {
-    delayedFadeOut(div)
+
+    if(el === div){
+      // check if element matches our div, which gets passed in to delayedFadeIn
+      //pull global variable from config.js, changed the miliseconds to our choosing
+      // if clicked we want the longest range else, shortrange for all of them
+      delayedFadeOut(div, LONGRANGE)
+    } else {
+      delayedFadeOut(div, SHORTRANGE)
+    }
   })
 }
 
 function fadeAllIn(group) {
   // Your solution here
   group.forEach(div => {
-    delayedFadeIn(div)
+    if(el === div){
+      delayedFadeIn(div, SHORTRANGE)
+    } else {
+      delayedFadeIn(div, LONGRANGE)
+    }
   })
 }
